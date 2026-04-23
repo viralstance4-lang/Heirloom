@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-cream font-sans text-luxury antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #c9a84c33;
+    color: #5a2e3b;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar       { width: 6px; }
+  ::-webkit-scrollbar-track { background: #faf7f2; }
+  ::-webkit-scrollbar-thumb { background: #c9a84c; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #a8893c; }
+}
+
+/* ─── Components ─────────────────────────────────────────── */
+@layer components {
+
+  /* Nav link hover underline */
+  .nav-link {
+    @apply relative inline-block;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-gold transition-all duration-300;
+  }
+  .nav-link:hover::after { @apply w-full; }
+
+  /* Section wrapper */
+  .section-pad { @apply py-20 md:py-28; }
+
+  /* Gold divider line */
+  .gold-divider {
+    @apply mx-auto my-6;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  }
+
+  /* Button: Primary (gold fill) */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-3.5
+           bg-gold text-luxury font-sans font-medium
+           text-xs tracking-luxury uppercase
+           transition-all duration-300 ease-luxury
+           hover:bg-gold-dark hover:shadow-gold hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-gold/40;
+  }
+
+  /* Button: Outlined */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-8 py-3.5
+           border border-current font-sans font-medium
+           text-xs tracking-luxury uppercase
+           transition-all duration-300 ease-luxury
+           hover:-translate-y-0.5 focus:outline-none;
+  }
+
+  /* Button: Ghost (arrow link) — add class "group" in JSX to enable arrow animation */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 font-sans font-medium
+           text-xs tracking-luxury uppercase
+           transition-all duration-300;
+  }
+  .btn-ghost span { @apply transition-transform duration-300; }
+  .btn-ghost:hover span { transform: translateX(5px); }
+
+  /* Product card — add class "group" in JSX */
+  .product-card {
+    @apply relative overflow-hidden cursor-pointer;
+  }
+  .product-card img {
+    @apply w-full object-cover transition-transform duration-700 ease-luxury;
+  }
+  .product-card .add-btn {
+    @apply absolute bottom-0 left-0 right-0
+           bg-luxury/90 text-white text-xs tracking-luxury uppercase
+           py-3 text-center
+           translate-y-full transition-transform duration-500 ease-luxury;
+  }
+
+  /* Category card */
+  .category-card {
+    @apply relative overflow-hidden cursor-pointer;
+  }
+  .category-card img {
+    @apply w-full h-full object-cover transition-transform duration-700 ease-luxury;
+  }
+  .category-card .overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-luxury/80 via-luxury/20 to-transparent
+           transition-opacity duration-300;
+  }
+
+  /* Shimmer loading placeholder */
+  .shimmer {
+    background: linear-gradient(90deg, #f0ebe0 25%, #e8e0d0 50%, #f0ebe0 75%);
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  /* Scroll-reveal utility */
+  .reveal { @apply opacity-0 translate-y-8 transition-all duration-700 ease-luxury; }
+  .reveal.visible { @apply opacity-100 translate-y-0; }
+
+  /* Horizontal scroll track */
+  .scroll-track {
+    @apply flex gap-5 overflow-x-auto pb-4;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scroll-track::-webkit-scrollbar { display: none; }
+}
+
+/* ─── Utilities ──────────────────────────────────────────── */
+@layer utilities {
+  .group-hover\:scale-108:hover { transform: scale(1.08); }
+
+  .text-shadow-luxury {
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+
+  .bg-luxury-gradient {
+    background: linear-gradient(135deg, #5a2e3b 0%, #3d1f28 100%);
+  }
+
+  .border-gold-thin { border-color: rgba(201,168,76,0.3); }
+}
+
+/* ─── Hero video / image parallax ───────────────────────── */
+.hero-bg {
+  will-change: transform;
+}
+
+/* ─── Prose overrides for brand story ───────────────────── */
+.brand-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.25;
+  color: #5a2e3b;
+}
