@@ -11,13 +11,13 @@ export const bannerSlides = [
   {
     id: 2,
     desktopImage: '/Banner-2.jpeg',
-    mobileImage:  U('1490481651871-ab68de25d43d', 768, 900),
+    mobileImage:   '/Banner2MOB.jpeg',
     link:         '/bridal',
   },
   {
     id: 3,
     desktopImage: '/Banner-3.jpeg',
-    mobileImage:  U('1524504388940-b1c1722653e8', 768, 900),
+    mobileImage:  '/Banner3MOB.jpeg',
     link:         '/occasion-wear',
   },
 ];
