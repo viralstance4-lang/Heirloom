@@ -35,18 +35,27 @@ export default function Navbar() {
         }`}
       style={{ top: mobileOpen ? 0 : undefined }}
     >
-      <div className="max-w-screen-xl mx-auto px-6 flex items-center justify-between gap-8">
+      <div className="max-w-screen-xl mx-auto px-6 flex items-center justify-between gap-4">
 
-        {/* Left Links */}
-        <div className="hidden lg:flex items-center gap-8 flex-1">
-          {leftLinks.map(l => (
-            <a key={l} href="#" className={`nav-link font-sans font-light text-xs tracking-luxury uppercase transition-colors duration-300 ${textColor} ${hoverColor}`}>
-              {l}
-            </a>
-          ))}
+        {/* Left: Desktop nav links / Mobile: hamburger */}
+        <div className="flex items-center gap-8 flex-1">
+          <div className="hidden lg:flex items-center gap-8">
+            {leftLinks.map(l => (
+              <a key={l} href="#" className={`nav-link font-sans font-light text-xs tracking-luxury uppercase transition-colors duration-300 ${textColor} ${hoverColor}`}>
+                {l}
+              </a>
+            ))}
+          </div>
+          <button
+            className={`lg:hidden transition-colors duration-300 ${textColor}`}
+            onClick={() => setMobileOpen(v => !v)}
+            aria-label="Toggle menu"
+          >
+            <MenuIcon open={mobileOpen} />
+          </button>
         </div>
 
-        {/* Logo */}
+        {/* Center: Logo */}
         <div className="text-center flex-shrink-0">
           <a href="#" className="block">
             <img
@@ -57,14 +66,16 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Right Links + Icons */}
-        <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
-          {rightLinks.map(l => (
-            <a key={l} href="#" className={`nav-link font-sans font-light text-xs tracking-luxury uppercase transition-colors duration-300 ${textColor} ${hoverColor}`}>
-              {l}
-            </a>
-          ))}
-          <div className="flex items-center gap-4 ml-2">
+        {/* Right: Desktop nav links + icons / Mobile: icons only */}
+        <div className="flex items-center gap-4 flex-1 justify-end">
+          <div className="hidden lg:flex items-center gap-8">
+            {rightLinks.map(l => (
+              <a key={l} href="#" className={`nav-link font-sans font-light text-xs tracking-luxury uppercase transition-colors duration-300 ${textColor} ${hoverColor}`}>
+                {l}
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-3 lg:ml-2">
             {[SearchIcon, HeartIcon].map((Icon, i) => (
               <button key={i} className={`transition-colors duration-300 ${textColor} ${hoverColor}`}>
                 <Icon />
@@ -80,15 +91,6 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-
-        {/* Mobile Toggle */}
-        <button
-          className={`lg:hidden transition-colors duration-300 ${textColor}`}
-          onClick={() => setMobileOpen(v => !v)}
-          aria-label="Toggle menu"
-        >
-          <MenuIcon open={mobileOpen} />
-        </button>
       </div>
 
       {/* Mobile Menu */}
@@ -104,11 +106,6 @@ export default function Navbar() {
               {l}
             </a>
           ))}
-          <div className="flex items-center gap-5 pt-4 pb-2">
-            {[SearchIcon, HeartIcon, BagIcon].map((Icon, i) => (
-              <button key={i} className="text-brand hover:text-gold transition-colors"><Icon /></button>
-            ))}
-          </div>
         </div>
       </div>
     </nav>
